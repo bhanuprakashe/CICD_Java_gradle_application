@@ -24,7 +24,7 @@ pipeline{
                     }
                 }
             }
-        stage("DOCKER BUILD & PUSH")
+        stage("DOCKER BUILD & PUSH"){
             steps{
                 script{
                     withCredentials([string(credentialsId: 'nexus_pass', variable: 'nexus_password')]) {
@@ -40,4 +40,3 @@ pipeline{
         }
     }
 }
-
