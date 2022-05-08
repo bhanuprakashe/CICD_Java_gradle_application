@@ -40,7 +40,7 @@ pipeline{
                 }
             }
         }
-        stage("Identifying misConfig Using DATREE in HELMCHART's")
+        stage("Identifying misConfig Using DATREE in HELMCHART's"){
             steps{
                 script{
                     dir('kubernetes/') {
@@ -48,6 +48,7 @@ pipeline{
                     }
                 }
             }
+        }
     }
     post {
 		always {
