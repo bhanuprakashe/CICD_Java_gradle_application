@@ -16,6 +16,7 @@ pipeline{
                         sh 'chmod +x gradlew'
                         sh './gradlew sonarqube'
                     }
+
                     timeout(5) {
                         def qg = waitForQualityGate()
                         if (qg.status != 'OK') {
@@ -29,12 +30,12 @@ pipeline{
             steps{
                 script{
                     withCredentials([string(credentialsId: 'nexus_pass', variable: 'nexus_password')]) {
-                        sh '''
-                        docker build -t 13.232.6.248:8083/springapp:${VERSION} .
-                        docker login -u admin -p $nexus_password 10.0.2.139:8083
-                        docker push 13.232.6.248:8083/springapp:${VERSION}
-                        docker rmi 13.232.6.248:8083/springapp:${VERSION}
-                        '''
+                            sh '''
+                                docker build -t 13.232.6.248:8083/springapp:${VERSION} .
+                                docker login -u admin -p $nexus_password 10.0.2.139:8083
+                                docker push 13.232.6.248:8083/springapp:${VERSION}
+                                docker rmi 13.232.6.248:8083/springapp:${VERSION}
+                            '''
                     }
                 }
             }
